@@ -5,7 +5,10 @@ pipeline {
         stage("Build Code"){
             steps {
                 echo "Building Code...."
-                sh "ls -lrt"
+                sh """
+                     ls -lrt
+                     mvn install
+                """
             }
         }
     }
