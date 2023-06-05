@@ -19,7 +19,7 @@ pipeline {
             
             steps {
                 echo "Running  Code Analysis"
-                sh "${scannerHome}/bin/sonar-scanner --version"
+                sh "${scannerHome}/bin/sonar-scanner"
             }
         }
     }
