@@ -21,7 +21,7 @@ pipeline {
                 withSonarQubeEnv('venkat-sonarqube-server') {
                     // some block
                     echo "Running  Code Analysis"
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=springbootapp -Dsonar.projectName=SpringApp -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8"
                 }
                 // withSonarQubeEnv("${SONAR_URL}", credentialsId: 'jenkins-sonar-token') {
                 //         // some block
