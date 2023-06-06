@@ -1,5 +1,8 @@
 pipeline { 
     agent any 
+    environment {
+        def scannerHome = tool 'sonar4.8';
+    }
     stages {
 
         stage("Build Code"){
@@ -13,10 +16,6 @@ pipeline {
         }
 
         stage("Code Analysis"){
-            environment {
-               def scannerHome = tool 'sonar4.8';
-            }
-            
             steps {
                 echo "Running  Code Analysis"
                 sh "${scannerHome}/bin/sonar-scanner"
