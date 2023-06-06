@@ -2,6 +2,7 @@ pipeline {
     agent any 
     environment {
         def scannerHome = tool 'sonar4.8';
+        SONAR_URL = "http://172.31.18.115:8181/"
     }
     stages {
 
@@ -17,8 +18,12 @@ pipeline {
 
         stage("Code Analysis"){
             steps {
-                echo "Running  Code Analysis"
-                sh "${scannerHome}/bin/sonar-scanner"
+                withSonarQubeEnv("${SONAR_URL}",credentialsId: 'jenkins-sonar-token') {
+                        // some block
+                    echo "Running  Code Analysis"
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+                
             }
         }
     }
