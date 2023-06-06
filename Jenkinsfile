@@ -18,11 +18,16 @@ pipeline {
 
         stage("Code Analysis"){
             steps {
-                withSonarQubeEnv("${SONAR_URL}",credentialsId: 'jenkins-sonar-token') {
-                        // some block
+                withSonarQubeEnv('venkat-sonarqube-server') {
+                    // some block
                     echo "Running  Code Analysis"
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
+                // withSonarQubeEnv("${SONAR_URL}", credentialsId: 'jenkins-sonar-token') {
+                //         // some block
+                //     echo "Running  Code Analysis"
+                //     sh "${scannerHome}/bin/sonar-scanner"
+                // }
                 
             }
         }
