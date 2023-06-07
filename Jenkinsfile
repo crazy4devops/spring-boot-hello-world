@@ -34,7 +34,7 @@ pipeline {
                 
                 rtServer (
                         id: 'jfrog-server',
-                        url: 'http://172.31.21.215:8082/artifactory/example-repo-local/',
+                        url: 'http://172.31.21.215:8082/artifactory/',
                             // If you're using username and password:
                         username: 'admin',
                         password: 'Admin@123',
