@@ -4,7 +4,7 @@ pipeline {
         def scannerHome = tool 'sonar4.8'
     }
     stages {
-
+        // Starting CI
         stage("Build Code"){
             steps {
                
@@ -66,7 +66,7 @@ pipeline {
                     
             }
         } 
-        
+        // Starting CD
         stage("Deploy - Dev"){
             steps {
               echo "Deploying to Dev servers...."
