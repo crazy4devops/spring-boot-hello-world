@@ -14,6 +14,11 @@ pipeline {
                 sh "ls -lrt target/"
             }
         }
+        stage("Run Unit Tests"){
+            steps {
+               sh "mvn test"
+            }
+        }
         stage("Code Analysis"){
             steps {
                 withSonarQubeEnv('venkat-sonarqube-server') {
@@ -21,7 +26,6 @@ pipeline {
                 }
             }
         }
-
         stage("Quality Gate") {
             steps {
                 timeout(time: 30, unit: 'MINUTES') {
@@ -35,7 +39,7 @@ pipeline {
                 rtServer (
                         id: 'jfrog-server',
                         url: 'http://172.31.21.215:8082/artifactory/',
-                            // If you're using username and password:
+                        // If you're using username and password:
                         username: 'admin',
                         password: 'Admin@123',
                         // If you're using Credentials ID:
