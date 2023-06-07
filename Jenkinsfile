@@ -66,6 +66,23 @@ pipeline {
                     
             }
         } 
+        
+        stage("Deploy - Dev"){
+            steps {
+              echo "Deploying to Dev servers...."
+            }
+        }
+        stage("Deploy - UAT"){
+            steps {
+              echo "Deploying to UAT servers...."
+            }
+        }
+        stage("Deploy - PRD"){
+            steps {
+              echo "Deploying to PRD servers...."
+            }
+        }
+        
     }
     post {
         always {
