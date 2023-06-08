@@ -1,0 +1,15 @@
+pipeline{
+    agent any
+    stages{
+        stage("build code"){
+            steps{
+                sh '''
+                mvn install 
+                cd target 
+                ls -lrt
+                '''
+            }
+        }
+
+    }
+}
