@@ -71,7 +71,7 @@ pipeline {
             steps {
                 sshagent(credentials: ['ssh-creds-deploy-dev']) {
                     sh """
-                        sh 'ssh -o StrictHostKeyChecking=no  172.31.21.226 uname -a'
+                        sh 'ssh -o StrictHostKeyChecking=no  -l cloud_user 172.31.21.226 uname -a'
                     """
                 }
             }
