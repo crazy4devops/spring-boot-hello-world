@@ -69,7 +69,11 @@ pipeline {
         // Starting CD
         stage("Deploy - Dev"){
             steps {
-              echo "Deploying to Dev servers...."
+                sshagent(credentials: ['ssh-creds-deploy-dev']) {
+                    sh """
+                        sh 'ssh -o StrictHostKeyChecking=no  172.31.21.226 uname -a'
+                    """
+                }
             }
         }
         stage("Deploy - UAT"){
