@@ -11,7 +11,7 @@ public class HelloWorldController {
         return "Hello, World!";
     }
     @GetMapping("/sayhello")
-    public String sendGreetings() {
+    public String sendGreeting() {
         return "Welcome to DevOps!....";
     }
 }
