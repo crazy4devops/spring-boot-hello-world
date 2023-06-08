@@ -15,7 +15,7 @@ pipeline{
                 //Execute SonarQube scanner
                 withSonarQubeEnv('sonar-jenkins') {
                     // Run the scanner using the SonarQube project key and name
-                    sh 'mvn sonar:sonar'
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=sonar-key -Dsonar.projectName=sonar-project'
                 }
             }
         }
