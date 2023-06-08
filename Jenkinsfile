@@ -73,7 +73,7 @@ pipeline {
                     //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
                     sh """                    
                     scp -o StrictHostKeyChecking=no ./target/*.jar cloud_user@172.31.21.226:/home/cloud_user
-                    ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar
+                    ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
                     """
                 }
             }
