@@ -69,10 +69,13 @@ pipeline {
         // Starting CD
         stage("Deploy - Dev"){
             steps {
-                sshagent(credentials: ['ssh-creds-deploy-dev']) {
-                    sh """
-                        sh 'ssh -vvv -o StrictHostKeyChecking=no  -l cloud_user 172.31.21.226 uname -a'
-                    """
+                // sshagent(credentials: ['ssh-creds-deploy-dev']) {
+                //     sh """
+                //         sh 'ssh -vvv -o StrictHostKeyChecking=no  -l cloud_user 172.31.21.226 uname -a'
+                //     """
+                // }
+                sshagent (credentials: ['ssh-creds-deploy-dev']) {
+                 sh "ssh -vvv -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
                 }
             }
         }
