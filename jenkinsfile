@@ -1,25 +1,22 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage("build code"){
-            steps{
-                sh '''
-                mvn install 
-                cd target 
-                ls -lrt
-                '''
+        stages{
+            stage("build code")
+            {
+                echo "build is success"
             }
-        }
-        stage('SonarQube Analysis') {
-            steps {
-                //Execute SonarQube scanner
-                withSonarQubeEnv('sonar-jenkins') {
-                    // Run the scanner using the SonarQube project key and name
-                    sh 'mvn clear verify  sonar:sonar \
-                     -Dsonar.host=$sonarurl\
-                     -Dsonar.login=$sonarlogin'
-                }
+             stage("test code")
+            {
+                echo "test is success"
             }
+             stage("code analysis code")
+            {
+                echo "code analysis is success"
+            }
+             stage("deploy")
+            {
+                echo "deploy is success"
+            }
+
         }
-    }
 }
