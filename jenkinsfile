@@ -1,27 +1,32 @@
 pipeline {
     agent any
-        stages{
+        stages
+        {
             stage("build code")
             {
-                steps{  
-                    echo "build is success"
+                steps
+                {  
+                echo "build is success"
                 }
             }
              stage("test code")
             {
-                steps{
+                steps
+                {
                 echo "test is success"
                 }
             }
              stage("code analysis code")
             {
-                steps{
+                steps
+                {
                 echo "code analysis is success"
                 }
             }
              stage("deploy")
             {
-                steps{
+                steps
+                {
                 echo "deploy is success"
                 }
             }
