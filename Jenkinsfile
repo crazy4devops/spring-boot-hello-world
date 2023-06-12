@@ -60,10 +60,7 @@ pipeline {
                             }
                         ]
                     }''',
-                )
-
-                
-                    
+                )    
             }
         } 
         // Starting CD
@@ -80,12 +77,26 @@ pipeline {
         }
         stage("Deploy - UAT"){
             steps {
-              echo "Deploying to UAT servers...."
+                echo "Deploying to UAT servers...."
+                sshagent (credentials: ['ssh-creds-deploy-uat']) {
+                        //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
+                        sh """                    
+                        scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@44.201.255.119:/home/ubunut
+                        ssh -o StrictHostKeyChecking=no -T ubuntu@44.201.255.119 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
+                        """
+                }
             }
         }
         stage("Deploy - PRD"){
             steps {
               echo "Deploying to PRD servers...."
+              sshagent (credentials: ['ssh-creds-deploy-prd']) {
+                        //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
+                        sh """                    
+                        scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@3.93.58.233:/home/ubunut
+                        ssh -o StrictHostKeyChecking=no -T ubuntu@3.93.58.233 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
+                        """
+                }
             }
         }
         
