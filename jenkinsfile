@@ -1,5 +1,8 @@
 pipeline{
     agent any
+     environment {
+        def scannerHome = tool 'sonarqube-scanner'
+    }
     stages{
         stage("build"){
             steps{
@@ -9,13 +12,10 @@ pipeline{
                 """
             }
         }
-        stage('Sonarqube') {
-            environment {
-                scannerHome = tool 'sonarqube-scanner'
-            }
+        stage("Code Analysis"){
             steps {
                 withSonarQubeEnv('sonar-jenkins') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=today-sonar-token -Dsonar.projectName=todaySpringApp -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8"
                 }
             }
         }
