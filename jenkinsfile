@@ -15,7 +15,7 @@ pipeline{
         stage("Code Analysis"){
             steps {
                 withSonarQubeEnv('sonar-jenkins') {
-                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=today-sonar-token -Dsonar.projectName=todaySpringApp -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8"
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=today-sonar-token -Dsonar.projectName=todaySpringApp -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8 -Dsonar.java.binaries= **/*.java"
                 }
             }
         }
