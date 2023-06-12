@@ -88,7 +88,7 @@ pipeline {
             }
         }
         stage("Deploy - PRD"){
-             input{
+            input{
                  message "Do you want to proceed for production deployment?"
             }
             steps {
