@@ -81,7 +81,7 @@ pipeline {
                 sshagent (credentials: ['ssh-creds-deploy-uat']) {
                         //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
                         sh """                    
-                        scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@44.201.255.119:/home/ubunut
+                        scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@44.201.255.119:/home/ubuntu
                         ssh -o StrictHostKeyChecking=no -T ubuntu@44.201.255.119 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
                         """
                 }
@@ -93,7 +93,7 @@ pipeline {
               sshagent (credentials: ['ssh-creds-deploy-prd']) {
                         //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
                         sh """                    
-                        scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@3.93.58.233:/home/ubunut
+                        scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@3.93.58.233:/home/ubuntu
                         ssh -o StrictHostKeyChecking=no -T ubuntu@3.93.58.233 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
                         """
                 }
