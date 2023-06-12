@@ -1,4 +1,4 @@
-# must be unique in a given SonarQube instance
+<!-- # must be unique in a given SonarQube instance
 sonar.projectKey= today-sonar-token
 
 # --- optional properties ---
@@ -15,4 +15,4 @@ sonar.sources=.
 sonar.sourceEncoding=UTF-8
 #----- Default SonarQube server
 sonar.host.url=http://192.168.0.105:9000
-sonar.java.binaries=target/classes
+sonar.java.binaries=target/classes -->
