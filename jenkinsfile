@@ -1,35 +1,15 @@
-pipeline {
+pipeline{
     agent any
-        stages
-        {
-            stage("build code")
-            {
-                steps
-                {  
-                echo "build is success"
-                }
+    stages{
+        stage("build"){
+            steps{
+                sh """
+                ls -lrt
+                mvn install
+                cd /target
+                """
             }
-             stage("test code")
-            {
-                steps
-                {
-                echo "test is success"
-                }
-            }
-             stage("code analysis code")
-            {
-                steps
-                {
-                echo "code analysis is success"
-                }
-            }
-             stage("deploy")
-            {
-                steps
-                {
-                echo "deploy is success"
-                }
-            }
-
         }
+
+    }
 }
