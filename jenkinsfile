@@ -10,6 +10,16 @@ pipeline{
                 """
             }
         }
+        stage('Sonarqube') {
+            environment {
+                scannerHome = tool 'sonarqube-scanner'
+            }
+            steps {
+                withSonarQubeEnv('sonar-jenkins') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+        }
 
     }
 }
