@@ -88,6 +88,9 @@ pipeline {
             }
         }
         stage("Deploy - PRD"){
+             input{
+                 message "Do you want to proceed for production deployment?"
+            }
             steps {
               echo "Deploying to PRD servers...."
               sshagent (credentials: ['ssh-creds-deploy-prd']) {
