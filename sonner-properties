@@ -14,5 +14,5 @@ sonar.sources=.
 # Encoding of the source code. Default is default system encoding
 sonar.sourceEncoding=UTF-8
 #----- Default SonarQube server
-sonar.host.url=http://192.168.29.141:9000
+sonar.host.url=http://192.168.0.105:9000
 sonar.java.binaries=target/classes
