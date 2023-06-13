@@ -3,6 +3,9 @@ pipeline {
     environment {
         def scannerHome = tool 'sonar4.8'
     }
+    // triggers {
+    //     cron '* * * * *'
+    // }
     stages {
         // Starting CI
         stage("Build Code"){
