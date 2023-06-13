@@ -3,9 +3,16 @@ pipeline {
     environment {
         def scannerHome = tool 'sonar4.8'
     }
-    // triggers {
-    //     cron '* * * * *'
-    // }
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+            [key: 'ref', value: '$.ref']
+            ],
+            causeString: 'Triggered on $ref',
+            token: 'abcd1234'
+            
+        )
+    }
     stages {
         // Starting CI
         stage("Build Code"){
