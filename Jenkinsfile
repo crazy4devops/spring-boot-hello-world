@@ -1,5 +1,7 @@
 pipeline { 
-    agent any 
+    agent { 
+        label 'ubuntu-machine' 
+    }
     environment {
         def scannerHome = tool 'sonar4.8'
     }
@@ -10,7 +12,6 @@ pipeline {
             ],
             causeString: 'Triggered on $ref',
             token: 'abcd1234'
-            
         )
     }
     stages {
