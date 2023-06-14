@@ -75,44 +75,44 @@ pipeline {
             }
         } 
         // Starting CD
-        stage("Deploy - Dev"){
-            steps {
-                sshagent (credentials: ['ssh-creds-deploy-dev']) {
-                    //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
-                    sh """                    
-                    scp -o StrictHostKeyChecking=no ./target/*.jar cloud_user@172.31.21.226:/home/cloud_user
-                    ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
-                    """
-                }
-            }
-        }
-        stage("Deploy - UAT"){
-            steps {
-                echo "Deploying to UAT servers...."
-                sshagent (credentials: ['ssh-creds-deploy-uat']) {
-                        //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
-                        sh """                    
-                        scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@44.201.255.119:/home/ubuntu
-                        ssh -o StrictHostKeyChecking=no -T ubuntu@44.201.255.119 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
-                        """
-                }
-            }
-        }
-        stage("Deploy - PRD"){
-            input{
-                 message "Do you want to proceed for production deployment?"
-            }
-            steps {
-              echo "Deploying to PRD servers...."
-              sshagent (credentials: ['ssh-creds-deploy-prd']) {
-                        //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
-                        sh """                    
-                        scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@3.93.58.233:/home/ubuntu
-                        ssh -o StrictHostKeyChecking=no -T ubuntu@3.93.58.233 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
-                        """
-                }
-            }
-        }
+        // stage("Deploy - Dev"){
+        //     steps {
+        //         sshagent (credentials: ['ssh-creds-deploy-dev']) {
+        //             //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
+        //             sh """                    
+        //             scp -o StrictHostKeyChecking=no ./target/*.jar cloud_user@172.31.21.226:/home/cloud_user
+        //             ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
+        //             """
+        //         }
+        //     }
+        // }
+        // stage("Deploy - UAT"){
+        //     steps {
+        //         echo "Deploying to UAT servers...."
+        //         sshagent (credentials: ['ssh-creds-deploy-uat']) {
+        //                 //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
+        //                 sh """                    
+        //                 scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@44.201.255.119:/home/ubuntu
+        //                 ssh -o StrictHostKeyChecking=no -T ubuntu@44.201.255.119 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
+        //                 """
+        //         }
+        //     }
+        // }
+        // stage("Deploy - PRD"){
+        //     input{
+        //          message "Do you want to proceed for production deployment?"
+        //     }
+        //     steps {
+        //       echo "Deploying to PRD servers...."
+        //       sshagent (credentials: ['ssh-creds-deploy-prd']) {
+        //                 //  sh "ssh -o StrictHostKeyChecking=no -T cloud_user@172.31.21.226 uname -a"
+        //                 sh """                    
+        //                 scp -o StrictHostKeyChecking=no ./target/*.jar ubuntu@3.93.58.233:/home/ubuntu
+        //                 ssh -o StrictHostKeyChecking=no -T ubuntu@3.93.58.233 nohup java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT-${BUILD_NUMBER}.jar &
+        //                 """
+        //         }
+        //     }
+        // }
         
     }
     post {
