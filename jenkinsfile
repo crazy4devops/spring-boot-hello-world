@@ -1,8 +1,8 @@
 pipeline{
     agent any
-     environment {
-        def scannerHome = tool 'sonarqube-scanner'
-    }
+    //  environment {
+    //     def scannerHome = tool 'sonarqube-scanner'
+    // }
     stages{
         stage("build"){
             steps{
@@ -28,4 +28,3 @@ pipeline{
         }
     }
 }
-//f
