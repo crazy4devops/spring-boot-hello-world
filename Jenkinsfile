@@ -1,6 +1,6 @@
 pipeline { 
     agent { 
-        label 'ubuntu-machine' 
+        label 'windows-machine' 
     }
     environment {
         def scannerHome = tool 'sonar4.8'
