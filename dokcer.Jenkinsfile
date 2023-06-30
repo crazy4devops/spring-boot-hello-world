@@ -15,7 +15,7 @@ pipeline {
         }
         stage("Build Docker"){
             steps {
-                sh "docker build -t vsiraparapu/myspringapp:${BUILD_NUMBER}"
+                sh "docker build -t vsiraparapu/myspringapp:${BUILD_NUMBER} ."
             }
         }
         stage("Push Docker"){
