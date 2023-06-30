@@ -30,10 +30,13 @@ pipeline {
         
         stage("Push Docker"){
             steps {
-                docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push("$BUILD_NUMBER")
-                    dockerImage.push('latest')
-               }
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')
+                }
+                }
+                
                 
             }
         }
