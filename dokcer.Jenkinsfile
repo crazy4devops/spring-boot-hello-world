@@ -25,20 +25,19 @@ pipeline {
                
             }
         }
-        
         stage("Push Docker"){
             steps {
                 script {
                     docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
+                        dockerImage.push()
                     }
                 }    
             }
         }
         stage('Remove Image') {
             steps{
-                    sh "docker rmi ${registry}:$BUILD_NUMBER"
-                    sh "docker rmi ${registry}:latest"
+                sh "docker rmi ${registry}:$BUILD_NUMBER"
+                sh "docker rmi ${registry}:latest"
             }
         }
         
