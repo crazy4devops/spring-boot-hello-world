@@ -20,7 +20,10 @@ pipeline {
         }
         stage("Push Docker"){
             steps {
+                withCredentials([usernameColonPassword(credentialsId: 'ubuntu-machine-creds', variable: 'mycreds-docker')]) {
                 sh "docker push vsiraparapu/myspringapp:${BUILD_NUMBER}"
+               }
+                
             }
         }
         
