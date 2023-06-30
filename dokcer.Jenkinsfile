@@ -1,5 +1,10 @@
 pipeline { 
     agent any
+   environment {
+        imagename = "vsiraparapu/myspringapp"
+        registryCredential = 'docker-jenkins-creds'
+        dockerImage = ''
+        }
     stages {
         // Starting CI ---
         stage("Build Code"){
@@ -15,14 +20,16 @@ pipeline {
         }
         stage("Build Docker"){
             steps {
-                sh "docker build -t vsiraparapu/myspringapp:${BUILD_NUMBER} ."
+              //  sh "docker build -t vsiraparapu/myspringapp:${BUILD_NUMBER} ."
+                dockerImage = docker.build imagename
             }
         }
+        
         stage("Push Docker"){
             steps {
-                withCredentials([usernameColonPassword(credentialsId: 'ubuntu-machine-creds', variable: 'mycreds-docker')]) {
-                sh "docker push vsiraparapu/myspringapp:${BUILD_NUMBER}"
-               }
+                docker.withRegistry( '', registryCredential ) {
+                dockerImage.push("$BUILD_NUMBER")
+                dockerImage.push('latest')
                 
             }
         }
