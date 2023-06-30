@@ -1,12 +1,11 @@
 pipeline { 
     agent any
-   environment {
-        imagename = "vsiraparapu/myspringapp"
+    environment {
+        registry = "vsiraparapu/myspringapp"
         registryCredential = 'docker-jenkins-creds'
         dockerImage = ''
-        }
+    }
     stages {
-        // Starting CI ---
         stage("Build Code"){
             steps {
                 sh "mvn install"
@@ -20,9 +19,8 @@ pipeline {
         }
         stage("Build Docker"){
             steps {
-              //  sh "docker build -t vsiraparapu/myspringapp:${BUILD_NUMBER} ."
               script {
-                 dockerImage = docker.build imagename
+               dockerImage = docker.build registry + ":$BUILD_NUMBER"
               }
                
             }
@@ -34,7 +32,7 @@ pipeline {
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push("$BUILD_NUMBER")
                         dockerImage.push('latest')
-                }
+                    }
                 }
                 
                 
