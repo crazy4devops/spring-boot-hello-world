@@ -6,7 +6,7 @@ pipe line{
         {
             steps
             {
-                sh"maven install"
+                sh "maven install"
             }
         }
     }
