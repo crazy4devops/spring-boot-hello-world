@@ -1,5 +1,4 @@
-pipe line 
-{
+pipe line{
     agent any
     stages
     {
