@@ -3,10 +3,10 @@ pipeline
     agent any
     stages
     {
-        stage("builld code")
+        stage("build code")
         {
             steps{
-                echo "build success"
+                sh "mvn install"
             }
         }
     }
