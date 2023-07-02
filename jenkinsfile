@@ -1,15 +1,12 @@
 pipe line{
     agent any
-     tools { 
-        maven 'maven' 
-    }
     stages
     {
         stage("build code")
         {
             steps
             {
-                sh "maven install"
+                echo "maven install"
             }
         }
     }
