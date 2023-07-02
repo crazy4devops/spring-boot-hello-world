@@ -1,13 +1,12 @@
-pipe line
+pipeline
 {
     agent any
     stages
     {
-        stage("build code")
+        stage("builld code")
         {
-            steps
-            {
-                echo "maven install"
+            steps{
+                echo "build success"
             }
         }
     }
