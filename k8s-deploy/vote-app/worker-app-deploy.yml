@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: worker-app-deploy
+   labels:
+     app: worker-app-deploy
+spec:
+  replicas: 2
+  selector:
+   matchLabels:
+     app: worker-app
+  template:
+    metadata:
+       name: worker-app
+       labels:
+         app: worker-app
+    spec:
+      containers:
+        - name: worker-app-container
+          image: vsiraparapu/worker-app
+            

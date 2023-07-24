@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: result-app-deploy
+   labels:
+     app: result-app-deploy
+spec:
+  replicas: 2
+  selector:
+   matchLabels:
+     app: result-app
+     type: frontend
+  template:
+    metadata:
+       name: result-app
+       labels:
+         app: result-app
+         type: frontend
+    spec:
+      containers:
+        - name: result-app-container
+          image: vsiraparapu/result-app
+          ports:
+          - containerPort: 80
+            
