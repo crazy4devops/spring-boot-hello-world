@@ -1,31 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-   name: db-app-deploy
-   labels:
-     app: db-app-deploy
+  labels:
+    app: db
+  name: db
 spec:
   replicas: 1
   selector:
-   matchLabels:
-     app: db-app
-     type: backend
+    matchLabels:
+      app: db-app
+      type: backend
   template:
     metadata:
-       name: db-app
-       labels:
-         app: db-app
-         type: backend
+      labels:
+        app: db-app
+        type: backend
     spec:
       containers:
-        - name: db-app-container
-          image: postgres:latest
-          env:
-          - name: POSTGRES_USER
-            value: postgres
-          - name: POSTGRES_PASSWORD
-            value: postgres
-          ports:
-          - containerPort: 5432
-
-            
+      - image: postgres:15-alpine
+        name: postgres
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-data
+      volumes:
+      - name: db-data
+        emptyDir: {} 

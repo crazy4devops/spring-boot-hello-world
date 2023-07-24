@@ -1,25 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-   name: redis-app-deploy
-   labels:
-     app: redis-app-deploy
+  labels:
+    app: redis
+  name: redis
 spec:
   replicas: 1
   selector:
-   matchLabels:
-     app: redis-app
-     type: backend
+    matchLabels:
+      app: redis-app
+      type: backend
   template:
     metadata:
-       name: redis-app
-       labels:
-         app: redis-app
-         type: backend
+      labels:
+        app: redis-app
+        type: backend
     spec:
       containers:
-        - name: redis-app-container
-          image: redis:latest
-          ports:
-          - containerPort: 6379
-            
+      - image: redis:alpine
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+        volumeMounts:
+        - mountPath: /data
+          name: redis-data
+      volumes:
+      - name: redis-data
+        emptyDir: {} 
