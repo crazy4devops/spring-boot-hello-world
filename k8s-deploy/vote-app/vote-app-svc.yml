@@ -11,5 +11,5 @@ spec:
       app: vote-app
       type: frontend
     ports:
-     - port: 80
+     - port: 8080
        targetPort: 80
