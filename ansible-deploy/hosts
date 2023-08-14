@@ -1,0 +1,6 @@
+[tomcat_nodes]
+7ba2808d973c.mylabserver.com ansible_ssh_pass=Venkat@123 ansible_user=cloud_user ansible_ssh_connection=ssh ansible_sudo_pass=Venkat@123
+
+[dev]
+7ba2808d973c.mylabserver.com ansible_ssh_pass=Venkat@123 ansible_user=cloud_user ansible_ssh_connection=ssh ansible_sudo_pass=Venkat@123
+

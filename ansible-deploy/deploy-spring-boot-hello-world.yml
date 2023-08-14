@@ -1,0 +1,12 @@
+---
+- name: Deploy Spring boot hello world
+  hosts: dev
+  become: yes
+  tasks:
+
+     - name: Copy war file
+       copy:
+         src: ../target/*.war
+         dest: /usr/share/tomcat/webapps
+         owner: tomcat
+         group: tomcat
