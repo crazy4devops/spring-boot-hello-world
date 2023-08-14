@@ -1,0 +1,2 @@
+[tomcat_nodes]
+7ba2808d973c.mylabserver.com ansible_user=cloud_user ansible_ssh_pass=Venkat@123 ansible_ssh_connnection=ansible_ssh_connnection ansible_sudo_pass=Venkat@123 # Add Server IP address, one line per server
