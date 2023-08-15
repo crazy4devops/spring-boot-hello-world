@@ -12,7 +12,7 @@
     - name: Copy JAR file
       copy:
         src: "{{ item }}"
-        dest: /usr/share/tomcat/webapps
+        dest: /usr/share/tomcat/webapps/spring-boot-app.jar
         owner: tomcat
         group: tomcat
       with_fileglob:
