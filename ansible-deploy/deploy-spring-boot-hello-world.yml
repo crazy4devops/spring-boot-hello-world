@@ -6,6 +6,9 @@
      PATH: ""
   tasks:
 
+    - debug:
+        var: PATH
+        
      - name: Copy war file
        copy:
          src: "{{ PATH }}/target/*.jar"
