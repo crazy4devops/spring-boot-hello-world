@@ -8,10 +8,11 @@
 
     - debug:
         var: PATH
-        
+
      - name: Copy war file
        copy:
          src: "{{ PATH }}/target/*.jar"
          dest: /usr/share/tomcat/webapps
          owner: tomcat
          group: tomcat
+         remote_src: yes
