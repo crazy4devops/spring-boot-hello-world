@@ -21,9 +21,16 @@ pipeline {
             steps {
                 dir ('ansible-deploy'){
                     // sh "ansible-playbook tomcat-setup.yml -i hosts"
-                    sh "ansible-playbook deploy-spring-boot-hello-world.yml  -e PATH=${WORKSPACE} -i hosts -v"
-                }
+                   // sh "ansible-playbook deploy-spring-boot-hello-world.yml  -e PATH=${WORKSPACE} -i hosts -v"
 
+                    ansiColor('xterm') {
+                        ansiblePlaybook(
+                            playbook: 'deploy-spring-boot-hello-world.yml',
+                            inventory: 'hosts',
+                            extras: "-e PATH=${WORKSPACE}",
+                            colorized: true)
+                    }
+                }
             }
                
         }
