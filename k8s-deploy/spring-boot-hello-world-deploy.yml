@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: spring-boot-app-deploy
+   labels:
+     app: spring-boot-app
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+     app: spring-boot-app
+     type: frontend
+  template:
+    metadata:
+       name: spring-boot-app
+       labels:
+         app: spring-boot-app
+         type: frontend
+    spec:
+      containers:
+        - name: spring-boot-app-container
+          image: vsiraparapu/myspringapp:17
+          ports:
+          - containerPort: 8080
+            
