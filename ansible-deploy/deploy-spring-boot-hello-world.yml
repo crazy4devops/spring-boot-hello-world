@@ -9,10 +9,12 @@
     - debug:
         var: PATH
 
-    - name: Copy war file
+    - name: Copy JAR file
       copy:
-        src: "{{ PATH }}/target/*.jar"
+        src: "{{ item }}"
         dest: /usr/share/tomcat/webapps
         owner: tomcat
         group: tomcat
         remote_src: yes
+      with_fileglob:
+        - "{{ PATH }}/target/*.jar"
