@@ -1,6 +1,11 @@
 pipeline { 
     agent any
     stages {
+         stage("Get Env"){
+            steps {
+               sh "printenv"
+            }
+        }
         stage("Build Code"){
             steps {
                sh "mvn install"

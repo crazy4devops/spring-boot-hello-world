@@ -6,7 +6,7 @@
 
      - name: Copy war file
        copy:
-         src: ../target/*.war
+         src: ../target/*.jar
          dest: /usr/share/tomcat/webapps
          owner: tomcat
          group: tomcat
