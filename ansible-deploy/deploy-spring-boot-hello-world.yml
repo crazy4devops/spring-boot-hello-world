@@ -2,11 +2,13 @@
 - name: Deploy Spring boot hello world
   hosts: dev
   become: yes
+  vars:
+     PATH: ""
   tasks:
 
      - name: Copy war file
        copy:
-         src: ../target/*.jar
+         src: "{{ PATH }}/target/*.jar"
          dest: /usr/share/tomcat/webapps
          owner: tomcat
          group: tomcat
