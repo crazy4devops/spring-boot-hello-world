@@ -1,12 +1,9 @@
 pipeline { 
     agent any
     stages {
-        // Starting CI ---
         stage("Build Code"){
             steps {
                sh "mvn install"
-               
-               
             }
         }
         stage("Run Unit Tests"){
@@ -19,14 +16,12 @@ pipeline {
             steps {
                 dir ('ansible-deploy'){
                     sh "ansible-playbook tomcat-setup.yml -i hosts"
-                    sh "ansible-playbook deploy-spring-boot-hello-world -i hosts"
+                    sh "ansible-playbook deploy-spring-boot-hello-world.yml -i hosts"
                 }
 
             }
                
         }
-      
-        
     }
     post {
         always {
