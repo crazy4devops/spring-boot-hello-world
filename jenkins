@@ -5,6 +5,7 @@ pipeline {
             steps{
                 script{
                 sh "mvn install"
+                sh "ls-lrt target/"
                 }
             }
         }  
