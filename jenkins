@@ -2,10 +2,9 @@ pipeline {
     agent any
     stages{
         stage("hello") {
-            steps{
+            steps {
                 script{
-                sh "mvn install"
-                sh "ls-lrt target/*"
+                sh "ls -lrt"
                 }
             }
         }  
