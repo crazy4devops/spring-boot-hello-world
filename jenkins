@@ -11,8 +11,6 @@ pipeline{
             steps{
                echo "hello world2"
             }
-        }
-        
-        
+        }  
     }
 }
