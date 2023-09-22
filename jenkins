@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script{
                 sh "ls -lrt"
-                sh "maven install"
+                sh "mvn install"
                 }
             }
         }  
