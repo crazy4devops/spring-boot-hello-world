@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage("hello") {
             steps{
-                scripts{
+                script{
                 sh "mvn install"
                 sh "ls-lrt target/"
                 }
