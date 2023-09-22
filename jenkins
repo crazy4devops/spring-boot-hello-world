@@ -3,7 +3,9 @@ pipeline{
     stages{
         stage("hello"){
             steps{
-               echo "hello world"
+                sh "ls-lrt"
+                sh "mvn install"
+                sh "ls-lrt target/"
             }
         }
         stage("hello2"){
