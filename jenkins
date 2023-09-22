@@ -1,15 +1,10 @@
-pipeline{
+pipeline {
     agent any
     stages{
-        stage("hello"){
+        stage("hello") {
             steps{
                 sh "mvn install"
                 sh "ls-lrt target/"
-            }
-        }
-        stage("hello2"){
-            steps{
-               echo "hello world2"
             }
         }  
     }
