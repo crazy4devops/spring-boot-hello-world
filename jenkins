@@ -1,14 +1,30 @@
 pipeline {
     agent any
-    stages{
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }
+    stages {
+        stage('Sonarqube') {
+            steps {
+             withSonarQubeEnv('sonarqube') {
+             sh "${scannerHome}/bin/sonar-scanner"
+
+            }
+        }
+    }
+}           
         stage("hello") {
             steps {
                 script{
                 sh "ls -lrt"
                 sh "mvn install"
                 sh " ls -lrt target/*"
-                }
             }
-        }  
-    }
+
+        }
+    }  
 }
+
+
+
+
