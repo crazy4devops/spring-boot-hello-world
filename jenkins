@@ -10,7 +10,7 @@ pipeline {
             steps {
                 // Checkout your source code repository
                 // For example, if using Git:
-                git 'https://github.com/your/repo.git'
+                git  "https://github.com/20l35a0114/spring-boot-hello-world.git"
             }
         }
     }
