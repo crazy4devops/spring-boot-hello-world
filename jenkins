@@ -1,42 +1,33 @@
-pipeline {
+pipeline { 
     agent any
     environment {
-        // Define environment variables here
-        MAVEN_HOME = tool 'Maven'
-        SONARQUBE_URL = "http://192.168.29.233:8080"
-    }  
+        def scannerHome = tool 'sonar4.8'
+    }
     stages {
-        stage('Checkout') {
+        // Starting CI ---
+        stage("Build Code"){
             steps {
-                // Checkout your source code repository
-                // For example, if using Git:
-                git  "https://github.com/20l35a0114/spring-boot-hello-world.git"
+               sh "mvn install"
             }
         }
-        stage('Build') {
+        stage("Run Unit Tests"){
             steps {
-                // Use Maven to build the project
-                sh "${MAVEN_HOME} /usr/share/maven"
+               sh "mvn test"
             }
-        }    
-        stage('SonarQube Analysis') {
+        }
+        stage("Code Analysis"){
             steps {
-                script {
-                    withSonarQubeEnv('sonarqube') {
-                        sh "${MAVEN_HOME} /opt/sonarqube/docker/entrypoint.sh",
-                    }
+                withSonarQubeEnv('sonarQube scanner') {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sonar -Dsonar.projectName=sonar -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8"
                 }
             }
-        }    
-        stage('Quality Gate') {
+        }
+        stage("Quality Gate") {
             steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    def qg = waitForQualityGate()
-                    if (qg.status != 'OK') {
-                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                    }
+                timeout(time: 30, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
     }
-}        
+}     
