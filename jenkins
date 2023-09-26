@@ -1,33 +1,37 @@
-pipeline { 
-    agent any
+pipeline {
+   agent any
     environment {
-        def scannerHome = tool 'sonarqube'
+        def scannerHome = tool 'sonarQube scanner'
     }
-    stages {
-        // Starting CI ---
-        stage("Build Code"){
+   stages {
+        stage("Build"){
             steps {
-               sh "mvn install"
+               script {
+                  sh "mvn install"
+               }
             }
         }
-        stage("Run Unit Tests"){
+
+        stage("Unit-Test"){
             steps {
-               sh "mvn test"
+                script {
+                    sh "mvn test"
+                }
             }
         }
+
         stage("Code Analysis"){
             steps {
-                withSonarQubeEnv('sonarQube scanner') {
-                    sh "${scannerHome} "/opt/sonarqube/docker/entrypoint.sh",-Dsonar.sourceEncoding=UTF-8"
-                }
-            }
-        }
-        stage("Quality Gate") {
-            steps {
-                timeout(time: 30, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                withSonarQubeEnv('sonarqube') {
+                    sh """ ${scannerHome}/bin/sonar-scanner \
+                    -Dsonar.projectKey=spring-boot-hello-world \
+                    -Dsonar.projectName=spring-boot-hello-world \
+                    -Dsonar.sources=. \
+                    -Dsonar.java.binaries=target/classes \
+                    -Dsonar.sourceEncoding=UTF-8
+                    """
                 }
             }
         }
     }
-}     
+}
