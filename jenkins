@@ -3,7 +3,7 @@ pipeline {
     environment {
         // Define environment variables here
         MAVEN_HOME = tool 'Maven'
-        SONARQUBE_URL = 'http://sonarqube-server:9000'
+        SONARQUBE_URL = "http://192.168.29.233:8080"
     }  
     stages {
         stage('Checkout') {
@@ -13,24 +13,22 @@ pipeline {
                 git  "https://github.com/20l35a0114/spring-boot-hello-world.git"
             }
         }
-    }
         stage('Build') {
             steps {
                 // Use Maven to build the project
-                sh "${MAVEN_HOME}/bin/mvn clean package"
+                sh "${MAVEN_HOME} /usr/share/maven"
             }
-        }
-
+        }    
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube') {
-                        sh "${MAVEN_HOME}/bin/mvn sonar:sonar"
+                    withSonarQubeEnv('sonarqube') {
+                        sh "${MAVEN_HOME} /opt/sonarqube/docker/entrypoint.sh",
                     }
                 }
             }
-        }
-         stage('Quality Gate') {
+        }    
+        stage('Quality Gate') {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
                     def qg = waitForQualityGate()
@@ -40,4 +38,5 @@ pipeline {
                 }
             }
         }
-    } 
+    }
+}        
