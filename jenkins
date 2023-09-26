@@ -1,20 +1,41 @@
 pipeline {
-        agent none
-        stages {
-          stage("build & SonarQube analysis") {
-            agent any
-            steps {
-              withSonarQubeEnv('My SonarQube Server') {
-                sh 'mvn clean package sonar:sonar'
-              }
-            }
-          }
-          stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-          }
-        }
+   agent any
+   stages{
+
+    stage("Build Code"){
+      steps {
+         script {
+            sh '''
+            mvn install
+            myver="\$(grep -i version pom.xml |head -2 |tail -1|cut -d">" -f2|cut -d"<" -f1)"
+            mv target/*.war target/myApp-v.\$myver-release-\${BUILD_NUMBER}.war
+            '''
+         }
       }
+    }
+    stage("runing Unit Tests"){
+      steps {
+         script {
+            sh "mvn test"
+         }
+      }
+    }
+    stage("Code Analysis"){
+      environment {
+            def sonarHome = tool name: 'sonarscanner'
+      }
+      steps {  
+            withSonarQubeEnv('mysonarserver') {
+               sh "${sonarHome}/bin/sonar-scanner -Dproject.settings=./myjavaapp.properties" 
+            }
+            sleep time: 30000, unit: 'MILLISECONDS'
+            script {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                    }
+                }
+            }
+        } 
+    } 
+}          
