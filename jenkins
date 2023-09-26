@@ -1,7 +1,7 @@
 pipeline { 
     agent any
     environment {
-        def scannerHome = tool 'sonar4.8'
+        def scannerHome = tool 'sonarqube'
     }
     stages {
         // Starting CI ---
@@ -18,7 +18,7 @@ pipeline {
         stage("Code Analysis"){
             steps {
                 withSonarQubeEnv('sonarQube scanner') {
-                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sonar -Dsonar.projectName=sonar -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8"
+                    sh "${scannerHome} "/opt/sonarqube/docker/entrypoint.sh",-Dsonar.sourceEncoding=UTF-8"
                 }
             }
         }
