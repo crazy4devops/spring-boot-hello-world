@@ -24,8 +24,8 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh """ ${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=spring-boot-hello-world \
-                    -Dsonar.projectName=spring-boot-hello-world \
+                    -Dsonar.projectKey=sonar \
+                    -Dsonar.projectName=sonar \
                     -Dsonar.sources=. \
                     -Dsonar.java.binaries=target/classes \
                     -Dsonar.sourceEncoding=UTF-8
