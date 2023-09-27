@@ -1,7 +1,7 @@
 pipeline {
    agent any
     environment {
-        def scannerHome = tool 'sonarQube scanner'
+        def scannerHome = tool 'sonarqube'
     }
    stages {
         stage("Build"){
