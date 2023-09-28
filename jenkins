@@ -28,45 +28,12 @@ pipeline {
                     -Dsonar.java.binaries=target/classes \
                     -Dsonar.sourceEncoding=UTF-8
                     """
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 30, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
     }
-<<<<<<< HEAD
-}pipeline {
-   agent any
-    environment {
-        def scannerHome = tool 'sonar'
-    }
-   stages {
-        stage("Build"){
-            steps {
-               script {
-                  sh "mvn install"
-               }
-            }
-        }
-        stage("Unit-Test"){
-            steps {
-                script {
-                    sh "mvn test"
-                }
-            }
-        }
-        stage("Code Analysis"){
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh """ ${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=sonar \
-                    -Dsonar.projectName=sonar \
-                    -Dsonar.sources=. \
-                    -Dsonar.java.binaries=target/classes \
-                    -Dsonar.sourceEncoding=UTF-8
-                    """
-                }
-            }
-        }
-    }
-=======
->>>>>>> c1ed42be5a04de39e0c74c6eccce48eaaa9627e6
 }
