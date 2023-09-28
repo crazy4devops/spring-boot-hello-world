@@ -1,7 +1,7 @@
 pipeline {
    agent any
     environment {
-        def scannerHome = tool 'sonarqube'
+        def scannerHome = tool 'sonar'
     }
    stages {
         stage("Build"){
@@ -20,7 +20,7 @@ pipeline {
         }
         stage("Code Analysis"){
             steps {
-                withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('sonarqube') {
                     sh """ ${scannerHome}/bin/sonar-scanner \
                     -Dsonar.projectKey=sonar \
                     -Dsonar.projectName=sonar \
