@@ -32,6 +32,7 @@ pipeline {
             }
         }
     }
+<<<<<<< HEAD
 }pipeline {
    agent any
     environment {
@@ -66,4 +67,6 @@ pipeline {
             }
         }
     }
+=======
+>>>>>>> c1ed42be5a04de39e0c74c6eccce48eaaa9627e6
 }
