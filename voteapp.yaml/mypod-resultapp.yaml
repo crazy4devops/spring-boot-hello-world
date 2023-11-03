@@ -3,11 +3,11 @@ kind: Pod
 metadata:
    name: result-app
    labels:
-   app: result-app
-   type: frontend
+      app: result-app
+      type: frontend
 spec: 
    containers:
-      - name: result-app-container
-        image: vsiraparapu/result-app
-        ports:
-         - containerPort: 80
+    - name: result-app-container
+      image: vsiraparapu/result-app
+      ports:
+        - containerPort: 80

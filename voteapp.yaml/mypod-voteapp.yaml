@@ -3,11 +3,11 @@ kind: Pod
 metadata:
    name: vote-app
    labels:
-   app: vote-app
-   type: frontend
+     app: vote-app
+     type: frontend
 spec: 
    containers:
-      - name: vote-app-container
-        image: vsiraparapu/voting-app
-        ports:
-         - containerPort: 80
+    - name: vote-app-container
+      image: vsiraparapu/voting-app
+      ports:
+        - containerPort: 80

@@ -3,9 +3,9 @@ kind: Pod
 metadata:
    name: worker-app
    labels:
-   app: worker-app
-   type: frontend
+     app: worker-app
+     type: frontend
 spec: 
    containers:
-      - name: worker-app-container
-        image: vsiraparapu/worker-app
+    - name: worker-app-container
+      image: vsiraparapu/worker-app
