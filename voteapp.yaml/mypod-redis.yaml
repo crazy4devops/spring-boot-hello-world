@@ -1,0 +1,11 @@
+piVersion: v1
+kind: redis
+metadata:
+   name: redis
+   labels:
+   app: redis-app
+   type: frontend
+spec: 
+   containers:
+      - name: redis-app-container
+        image: redis
