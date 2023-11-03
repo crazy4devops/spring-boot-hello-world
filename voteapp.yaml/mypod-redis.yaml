@@ -1,5 +1,5 @@
 piVersion: v1
-kind: redis
+kind: Pod
 metadata:
    name: redis
    labels:
