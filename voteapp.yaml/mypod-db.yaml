@@ -3,14 +3,14 @@ kind: Pod
 metadata:
    name: db
    labels:
-   app: db-app
-   type: frontend
+     app: db-app
+     type: frontend
 spec: 
    containers:
       - name: db-app-container
         image: postgres
-         env: 
-        - name: POSTGRES_USERNAME
-          value: "postgres"
-        - name: POSTGRES_PASSWORD
-          value: "postgres"
+        env: 
+         - name: POSTGRES_USERNAME
+           value: "postgres"
+         - name: POSTGRES_PASSWORD
+           value: "postgres"
