@@ -10,4 +10,4 @@ spec:
     nodePort: 30005
   selector:
     app: nginx
-    type: back-end
+    type: frontend

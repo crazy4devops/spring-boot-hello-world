@@ -1,0 +1,26 @@
+pipeline {
+  agentany
+  environiment{
+      registry = "20l35a0114/hello-world"
+      registryCredential = 'uday'
+      dockerImage = ''
+     }
+  stages {
+      stage('Build-Code'){
+        steps {
+            script {
+                sh "mvn install"
+                }
+            }
+        }
+
+    }  
+      stage('Building our image') {
+        steps{
+            script {
+                dockerImage = docker.build registry + ":latest"
+            }
+        }
+    }
+}
+  

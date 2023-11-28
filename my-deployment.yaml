@@ -4,7 +4,7 @@ metadata:
   name: mypod-deployment
   labels:
     app: nginx
-    type: back-end
+    type: frontend
 spec:
   replicas: 3
   template:
@@ -12,7 +12,7 @@ spec:
       name: mynginx
       labels:
         app: nginx
-        type: back-end
+        type: frontend
     spec:
       containers:
        - name: nginx-container
@@ -20,4 +20,4 @@ spec:
   selector: 
     matchLabels:
       app: nginx
-      type: back-end
+      type: frontend
