@@ -1,5 +1,5 @@
 pipeline {
-  agentany
+  agent any
   stages {
       stage('Build-Code'){
         steps {
@@ -8,25 +8,24 @@ pipeline {
                 }
             }
         }
-
-    }  
-      stage('Building our image') {
+ 
+      stage('Building image') {
         steps{
             script {
                 sh " docker build -t 20l35a0114/hello-world:latest "
+                }
             }
         }
-    }
-       stage('pushimageregistry') {
+       stage('push image registry') {
         steps{
             script {
                 sh """
                 docker login -u 20l35a0114 -p dckr_pat_5giDr6lu7cpzS1Di1tZYZd0yNXI
                 docker push  20l35a0114/hello-world:latest
                 """
-           }  
-        }
-    }  
+                 }  
+            }
+        }  
         
+    }
 }
-  
