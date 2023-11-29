@@ -21,7 +21,7 @@ pipeline {
             script {
                 sh """
                 docker login -u 20l35a0114 -p dckr_pat_5giDr6lu7cpzS1Di1tZYZd0yNXI
-                docker push uday
+                docker push uday:latest
                 """
                  }  
             }
