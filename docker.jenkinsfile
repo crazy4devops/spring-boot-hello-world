@@ -24,6 +24,7 @@ pipeline {
                 docker push 20l35a0114/hello-world:latest
                 docker tag 20l35a0114/hello-world:latest 20l35a0114/hello-world:latest:${BUILD_NUMBER}
                 docker push 20l35a0114/hello-world:${BUILD_NUMBER}
+                docker rmi 20l35a0114/hello-world:${BUILD_NUMBER}
                 """
                 }  
             }
