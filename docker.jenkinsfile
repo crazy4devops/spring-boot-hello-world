@@ -22,8 +22,8 @@ pipeline {
                 sh """
                 docker login -u 20l35a0114 -p dckr_pat_5giDr6lu7cpzS1Di1tZYZd0yNXI
                 docker push 20l35a0114/hello-world:latest
-                docker tag 20l35a0114/hello-world:latest 20l35a0114/hello-world:${BUILD_NUMBER}
-                docker push 20l35a0114/hello-world:${BUILD_NUMBER}
+                docker tag 20l35a0114/hello-world:latest 20l35a0114/hello-world:${BUILD_NUMBER}-slim-bullseye
+                docker push 20l35a0114/hello-world:${BUILD_NUMBER}-slim-bullseye
                 """
                 }  
             }
