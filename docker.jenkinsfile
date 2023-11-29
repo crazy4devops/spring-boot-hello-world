@@ -12,6 +12,8 @@ pipeline {
       stage('Building image') {
         steps{
             script {
+                sh "sudo usermod -aG docker jenkins"
+
                 sh " docker build -t uday ."
                 }
             }
