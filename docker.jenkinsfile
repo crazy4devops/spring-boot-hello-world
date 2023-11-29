@@ -11,11 +11,7 @@ pipeline {
  
       stage('Building image') {
         steps{
-            script {
-                sh"echo "123" | sudo -S usermod -aG docker jenkins"
-
-                sh "sudo usermod -aG docker jenkins"
-
+            script{
                 sh " docker build -t uday ."
                 }
             }
