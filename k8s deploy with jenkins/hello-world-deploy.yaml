@@ -1,0 +1,27 @@
+apiVersion: apps/vl
+kind: Deployment
+metadata:
+  name: hello-world-app-deployment
+  Labels:
+    name: hello-world-app-deployment
+    app: hello-world-app
+spec: 
+  replicas: 1
+  template:
+    metadata:
+      name: hello-world-app-pod
+      Labels:
+        name: hello-world-app-pod
+        app: hello-world-app
+        type: frontend
+    spec:
+     - containers:
+        name: hello-world-app-container
+        image: 20l35a0114/uday:latest
+        ports:
+        - containerport: 8080
+  selectors:
+    matchLabels:
+       name: hello-world-app-pod
+       app: hello-world-app
+       type: frontend
