@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-        registry = "20l35a0114/uday"
+        registry = "20l35a0114/mohan"
         registryCredential = 'uday-pass'
         dockerImage = ''
     }
