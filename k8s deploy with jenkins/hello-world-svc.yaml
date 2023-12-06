@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadate:
   name:
-  Labels: hello-world-app-svc
+  labels:
    name: hello-world-app-svc
    app: hello-world-app
 spec:
