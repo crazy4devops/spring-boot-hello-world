@@ -2,11 +2,11 @@ pipeline {
    agent any 
    stages {
         stage('build code') {
-           steps {
+          steps {
              sh "mvn install"
             }
         stage('run unit test') {
-           steps {
+          steps {
              sh "mvn test"
                }
             }
