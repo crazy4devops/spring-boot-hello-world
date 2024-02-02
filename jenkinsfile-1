@@ -1,18 +1,18 @@
 pipeline {
-   agent any 
-   tools{
+    agent any 
+    tools {
       maven "3.6.0"
-   }
-   stages{
-      stage('build code'){
-         steps{
+    }
+    stages {
+        stage('build code') {
+            steps {
                checkout scmGit(branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/20l35a0114/spring-boot-hello-world/tree/dev']])
                sh "mvn clean install"
-              }
-      stage('run unit test'){
-         steps{
+               }
+        stage('run unit test') {
+            steps {
                sh "mvn test"
-              }
+               }
             }
         }
     }
