@@ -1,0 +1,72 @@
+pipeline {
+   agent any
+    environment {
+        def scannerHome = tool 'sonar'
+    }
+   stages {
+        stage("Build"){
+            steps {
+               script {
+                  sh "mvn install"
+               }
+            }
+        }
+        stage("Unit-Test"){
+            steps {
+                script {
+                    sh "mvn test"
+                }
+            }
+        }
+        stage("Code Analysis"){
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh """ ${scannerHome}/bin/sonar-scanner \
+                    -Dsonar.projectKey=sonar \
+                    -Dsonar.projectName=sonar \
+                    -Dsonar.sources=. \
+                    -Dsonar.java.binaries=target/classes \
+                    -Dsonar.sourceEncoding=UTF-8
+                    """
+                }
+            }
+        }           
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+         stage("Upload Artifacts"){
+            steps{
+                
+                rtServer (
+                        id: 'jfrog-server',
+                        url: 'http://192.168.29.158:8082/artifactory/',
+                        // If you're using username and password:
+                        username: 'admin',
+                        password: 'Uday@123',
+                        // If you're using Credentials ID:
+                        // credentialsId: 'ccrreeddeennttiiaall',
+                        // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
+                        // bypassProxy: true,
+                        // Configure the connection timeout (in seconds).
+                        // The default value (if not configured) is 300 seconds: 
+                        timeout: 300
+                )
+                rtUpload (
+                    serverId: 'jfrog-server',
+                    spec: '''{
+                        "files": [
+                            {
+                            "pattern": "target/*.jar",
+                            "target": "example-repo-local/spring-boot-hello-world/"
+                            }
+                        ]
+                    }''',
+                ) 
+            }
+        }
+    }
+}
